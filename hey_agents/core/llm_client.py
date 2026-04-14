@@ -49,9 +49,9 @@ if __name__ == '__main__':
         ]
         
         print("--- Calling LLM ---")
-        response = llmClient.think(messages)
-        if response:
+        response_text = llmClient.think(messages)
+        if response_text:
             print("\n\n--- Full model response ---")
-            print(response)
+            print(response_text)
     except ValueError as e:
         print(e)

@@ -28,6 +28,14 @@ def search(query: str) -> str:
         })
         outputs = []
         if "ai_overview" in results and "snippet" in results["ai_overview"]:
+            # Hint!
+            # 
+            # in -> 最标准的“检查 key”, 对应 Java 就是containsKey
+            # 
+            # .get -> 关心这个 key 对应的值有没有内容
+            # key 不存在 → False
+            # key 存在但 value 是空列表 / None / 空字符串 → False
+            # key 存在且 value 有内容 → True
             outputs.append(results["ai_overview"]["snippet"])
         if "answer_box" in results and "answer" in results["answer_box"]:
             outputs.append(results["answer_box"]["answer"])
@@ -53,6 +61,10 @@ def format_output(outputs) -> str:
     for item in outputs:
         if isinstance(item, list):
             output.extend(item)
+            # Hint!
+            # 
+            # extend -> 把一个 list 里的元素逐个加入另一个 list，而不是把整个 list 当成一个元素塞进去。
+            # Python 里最常见的“扁平化列表”处理
         else:
             output.append(item)
     
@@ -60,6 +72,9 @@ def format_output(outputs) -> str:
         return "Sorry, no info was found."
     else:
         return "\n\n".join(output)
+        # Hint!
+        # 
+        # 先用 list 收集，再 join, 这在 Python 里更常见，也更干净
     
     
 class ToolExecutor:
@@ -67,7 +82,7 @@ class ToolExecutor:
     A tool executor responsible for managing and executing tools.
     """
     def __init__(self):
-      self.tools: Dict[str, Dict[str, Any]] = {}
+      self.tools: dict[str, dict[str, Any]] = {}
       
     def registerTool(self, name: str, description: str, func: Callable):
         """
@@ -93,6 +108,8 @@ class ToolExecutor:
         """
         res = []
         for name, details in self.tools.items():
+            # Hint!
+            # .items() -> 遍历字典时同时获取键和值
             res.append("\n".join([f"- {name}: {details['description']}"]))
         return "\n".join(res)    
     

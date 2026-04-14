@@ -20,11 +20,46 @@ History: {history}
 
 from hey_agents.core.llm_client import HeyAgentsLLM
 from hey_agents.tools import ToolExecutor
+from typing import Dict, List, Any
 
 class ReActAgent:
     def __init__(self, llm_client: HeyAgentsLLM, tool_executor: ToolExecutor, max_steps: int = 5):
       self.llm_client = llm_client
       self.tool_executor = tool_executor
       self.max_steps = max_steps
+      self.history = []
       
-    def run():
+    def run(self, question: str):
+      """
+      Run the ReAct agent to answer a question.
+      """
+      self.history = [] # Reset on restart
+      step = 0
+      
+      while step < self.max_steps:
+        step += 1
+        print(f"--- The {step}th step ---")
+        
+        tools_desc = self.tool_executor.getAvailableTools()
+        history_str = "\n".join(self.history)
+        prompt = REACT_PROMPT_TEMPLATE.format(
+          tools = tools_desc,
+          question = question,
+          history = history_str
+        )
+        
+        messages = [{"role": "user", "content": prompt}]
+        response_text = self.llm_client.think(messages=messages)
+        
+        if not response_text:
+          print("Error: The LLM failed to return a valid response.")
+          break
+        
+        # ...
+        
+      def _parse_output(self, text: str):
+        """
+        Analyze the LLM's output to extract thoughts and actions.
+        """
+        
+        
