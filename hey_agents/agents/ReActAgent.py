@@ -19,7 +19,7 @@ History: {history}
 """
 
 import re
-from hey_agents.core.llm_client import HeyAgentsLLM
+from hey_agents.core.llm import HeyAgentsLLM
 from hey_agents.tools import ToolExecutor, search
 from typing import Dict, List, Any
 
