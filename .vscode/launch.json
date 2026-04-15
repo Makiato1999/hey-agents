@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug ReActAgent",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "hey_agents.agents.ReActAgent",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
