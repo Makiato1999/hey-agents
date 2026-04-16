@@ -1,3 +1,7 @@
+"""
+Deprecated version
+"""
+
 # ReAct 提示词模板
 REACT_PROMPT_TEMPLATE = """
 请注意，你是一个有能力调用外部工具的智能助手。
@@ -19,7 +23,7 @@ History: {history}
 """
 
 import re
-from hey_agents.core.llm_client import HeyAgentsLLM
+from hey_agents.core.llm import HeyAgentsLLM
 from hey_agents.tools import ToolExecutor, search
 from typing import Dict, List, Any
 
